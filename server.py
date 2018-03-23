@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, jso
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User, Result
+from helpers.classifierHelper import predict
 
 app = Flask(__name__)
 
@@ -11,9 +12,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+# In case you get error (numpy.ndarray is not callable) , wrap the variable with str()
 @app.route('/')
 def fooBar():
-    return "Hello world!"
+    a = predict([0.38,0.53,2,157,3,0,0,1],"randomForest")
+    return str(a) # sample sending the prediction directly to frontend
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
