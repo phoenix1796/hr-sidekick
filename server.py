@@ -14,10 +14,30 @@ session = DBSession()
 
 # In case you get error (numpy.ndarray is not callable) , wrap the variable with str()
 @app.route('/')
-def fooBar():
-    a = predict([0.38,0.53,2,157,3,0,0,1],"randomForest")
-    return str(a) # sample sending the prediction directly to frontend
+def login():
+    return render_template('login.html')
 
+@app.route('/', methods=['POST'])
+def login_post():
+    user = request.form['text']
+    processed_text = user.upper()
+    #passwd = request.form['password']	
+    return processed_text
+
+@app.route('/rf_tester')
+def input_data():
+	return render_template('data_input.html')
+
+@app.route('/rf_tester', methods=['POST'])
+def generate_result():
+    text = request.form['text']
+    processed_text = [float(i) for i in text.split(',')]
+    value = predict(processed_text, 'randomForest')
+    if value[0] == 1:
+        return render_template('result.html', cursor = 'Employee will not leave company.')
+    else:
+        return render_template('result.html', cursor = 'Employee will leave company.')
+    
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
