@@ -12,22 +12,6 @@ app = Flask(__name__, static_url_path='/static')
 engine = create_engine('sqlite:///hr_sidekick.db')
 Base.metadata.bind = engine
 
-DBSession = sessionmaker(bind=engine)
-
-
-
-#################
-
-
-@app.route('/rf_tester')
-def input_data():
-    error = None
-    if not session.get('logged_in'):
-        error = 'You need to login first.'
-        return render_template('login.html', error=error)
-    else:
-        return render_template('data_input.html')
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -56,27 +40,14 @@ def logout():
     return login()
 
 
-############
-
-
-''' 
-# Route for handling the login page logic
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('input_data'))
-    return render_template('login.html', error=error)    
-    
 @app.route('/rf_tester')
 def input_data():
-	if not session.get('logged_in'):
-		return render_template('login.html')
-	else:
-    	return render_template('data_input.html')'''
+    error = None
+    if not session.get('logged_in'):
+        error = 'You need to login first.'
+        return render_template('login.html', error=error)
+    else:
+        return render_template('data_input.html')
 
 
 @app.route('/rf_tester', methods=['POST'])

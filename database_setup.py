@@ -1,4 +1,3 @@
-import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -6,16 +5,18 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = 'user'
     name = Column(String(80), nullable=False)
     password = Column(String(255), nullable=False)
-    id = Column(Integer, primary_key = True)
-    
+    id = Column(Integer, primary_key=True)
+
     def __init__(self, username, password):
-    	self.name = username
-    	self.password = password
-    	
+        self.name = username
+        self.password = password
+
+
 class Result(Base):
     __tablename__ = 'result'
     inputs = Column(String(), nullable=False)
@@ -23,14 +24,15 @@ class Result(Base):
     result = Column(String())
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
-    
+
     @property
     def serialize(self):
         return {
             'inputs': self.inputs,
-            'result':self.result,
+            'result': self.result,
             'id': self.id
         }
+
 
 engine = create_engine(
     'sqlite:///hr_sidekick.db')
