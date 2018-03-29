@@ -8,22 +8,22 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-    name = Column(
-    String(80), nullable=False)
-    password = Column(
-        String(255), nullable=False)
-    id = Column(
-        Integer, primary_key = True
-    )
+    name = Column(String(80), nullable=False)
+    password = Column(String(255), nullable=False)
+    id = Column(Integer, primary_key = True)
+    
+    def __init__(self, username, password):
+    	self.name = username
+    	self.password = password
+    	
 class Result(Base):
     __tablename__ = 'result'
     inputs = Column(String(), nullable=False)
     id = Column(Integer, primary_key=True)
     result = Column(String())
-    user_id = Column(
-        Integer, ForeignKey('user.id')
-    )
+    user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
+    
     @property
     def serialize(self):
         return {

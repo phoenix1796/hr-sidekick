@@ -5,7 +5,7 @@ import numpy as np
 
 def input_data_chart(data):
 	labels = ['data' + str(i) for i in range(1,len(data)+1)]
-	y_pos = np.arange(len(labels))
+	y_pos = np.arange(len(labels)) 
 	plt.bar(y_pos, data, width = 0.40, align='center', alpha=0.5)
 	plt.xticks(y_pos, data)
 	plt.ylabel('Intensity')
