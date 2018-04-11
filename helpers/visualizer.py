@@ -21,7 +21,7 @@ def accuracy_ratio():
 	
 ## plot the importances ##
 def feature_importances(classifier):
-	importances = classifier.feature_importances_
+	importances = classifier.best_estimator_.feature_importances_
 	feat_names = ['','','','','','','']
 	indices = np.argsort(importances)[::-1]
 	plt.figure(figsize=(12,6))

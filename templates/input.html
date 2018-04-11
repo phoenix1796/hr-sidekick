@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <title>Hr-Sidekick</title>
+</head>
+<style>
+    .wrapper {
+        height: 90vh;
+        width: 90vw;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background-color: #f4f4f4;
+    }
+
+    .editForm {
+        width: 50%;
+        margin: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="editForm">
+            <form action="rf_tester" method="POST">
+                <p class="range-field">
+                    <label for="satisfaction_level">Satisfaction Level</label>
+                    <input type="range" value="50" id="satisfaction_level" name="satisfaction_level" min="0" max="100" />
+                </p>
+                <p>
+                    <label for="last_evaluation">Last evaluation</label>
+                    <input id="last_evaluation" value="0" name="last_evaluation" min="0" type="number">
+                </p>
+                <p>
+                    <label for="number_project">Number of projects</label>
+                    <input id="number_project" value="0" name="number_project" min="0" type="number">
+                </p>
+                <p>
+                    <label for="average_montly_hours">Average monthly hours</label>
+                    <input id="average_montly_hours" value="0" name="average_montly_hours" min="0" type="number">
+                </p>
+                <p>
+                    <label for="time_spend_company">Time spent in company</label>
+                    <input id="time_spend_company" value="0" name="time_spend_company" min="0" type="number">
+                </p>
+                <p>
+                    <label for="Work_accident">Work Accident</label>
+                    <div class="switch">
+                        <label>
+                            No
+                            <input id="Work_accident" name="Work_accident" type="checkbox">
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </p>
+                <p>
+                    <label for="promotion_last_5years">Any promotion in the last 5 years ?</label>
+                    <div class="switch">
+                        <label>
+                            No
+                            <input id="promotion_last_5years" name="promotion_last_5years" type="checkbox">
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </p>
+                <p>
+                        <label>Salary scale relative to your organization</label>
+
+                    <div class="input-field">
+                        <select name="salary" id="salary">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="0">High</option>
+                        </select>
+                    </div>
+                </p>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        M.AutoInit();
+    });
+</script>
+
+</html>

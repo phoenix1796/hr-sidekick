@@ -43,21 +43,32 @@ def logout():
 @app.route('/rf_tester')
 def input_data():
     error = None
-    if not session.get('logged_in'):
-        error = 'You need to login first.'
-        return render_template('login.html', error=error)
-    else:
-        return render_template('data_input.html')
+    # if not session.get('logged_in'):
+    #     error = 'You need to login first.'
+    #     return render_template('login.html', error=error)
+    # else:
+    return render_template('input.html')
 
 
 @app.route('/rf_tester', methods=['POST'])
 def generate_result():
-    text = request.form['text']
-    processed_text = [float(i) for i in text.split(',')]
+    # text = request.form['text']
+    # processed_text = [float(i) for i in text.split(',')]
+    processed_text = [
+        float(request.form['satisfaction_level']) / 100,
+        float(request.form['last_evaluation']),
+        float(request.form['number_project']),
+        float(request.form['average_montly_hours']),
+        float(request.form['time_spend_company']),
+        1 if request.form['Work_accident'] == 'on' else 0,
+        1 if request.form['promotion_last_5years'] == 'on' else 0,
+        int(request.form['salary'])
+    ]
+    print(processed_text)
     value = predict(processed_text, 'randomForest')
     vis.input_data_chart(processed_text)
     clf = _loadClassifier("classifiers/randomForest.pkl")  # % classifierName)
-    vis.feature_importances(clf)
+    # vis.feature_importances(clf)
     if value[0] == 1:
         return render_template('result.html', cursor='Employee will not leave company.')
     else:
