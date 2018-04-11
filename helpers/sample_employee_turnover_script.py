@@ -1,9 +1,11 @@
 # coding: utf-8
 # In[122]:
-
+import matplotlib
+matplotlib.use('agg')
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as pltlab 
 import pandas as pd
+import os.path
 
 # In[123]:
 
@@ -87,9 +89,9 @@ def visualize():
     plt.ylabel('Accuracy')
     plt.xlabel('Algorithms')
     plt.title('Algorithms Comparision')
-
-    plt.show()
-	
+	#if not os.path.isfile('../static/1.png'):
+	plt.savefig('../static/1.png')
+        
 # In[124]:
 
 if __name__=="__main__":

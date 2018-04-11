@@ -28,4 +28,4 @@ pip-log.txt
 venv
 *.pyc
 build
-
+.idea/
